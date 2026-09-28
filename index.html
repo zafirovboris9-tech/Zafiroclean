@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zafiro Clean — Nettoyage automobile</title>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:#0b0d10;color:#fff}
+header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #25282d}
+.logo{font-size:24px;font-weight:800;letter-spacing:.5px}.logo span{color:#3da9ff}
+nav a{color:#fff;text-decoration:none;margin-left:20px;font-size:14px}
+.hero{padding:80px 7%;text-align:center;background:linear-gradient(180deg,#111820,#0b0d10)}
+.hero h1{font-size:clamp(38px,8vw,68px);margin:0 0 18px}.hero p{color:#b9c0c8;font-size:18px;max-width:650px;margin:0 auto 30px;line-height:1.6}
+.btn{display:inline-block;background:#3da9ff;color:#fff;padding:15px 25px;border-radius:10px;text-decoration:none;font-weight:700;border:0;cursor:pointer}
+section{padding:60px 7%;max-width:1100px;margin:auto} h2{text-align:center;font-size:32px;margin-bottom:35px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:#15191e;border:1px solid #272c32;border-radius:15px;padding:25px}.card h3{margin-top:0}.price{font-size:30px;font-weight:800;color:#3da9ff}.card p{color:#b9c0c8;line-height:1.5}
+.form{max-width:650px;margin:auto;background:#15191e;border:1px solid #272c32;border-radius:15px;padding:25px}
+label{display:block;margin:14px 0 7px;font-weight:600}input,select,textarea{width:100%;padding:13px;border-radius:8px;border:1px solid #343a42;background:#0d1013;color:#fff;font-size:15px}
+textarea{min-height:90px;resize:vertical}.notice{color:#aeb6bf;font-size:13px;line-height:1.5;margin-top:14px}
+footer{text-align:center;padding:30px;color:#8e969f;border-top:1px solid #25282d}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">ZAFIRO <span>CLEAN</span></div>
+  <nav><a href="#prestations">Prestations</a><a href="#reservation">Réserver</a></nav>
+</header>
+
+<div class="hero">
+  <h1>Votre voiture, propre comme neuve.</h1>
+  <p>Nettoyage intérieur automobile à domicile sur Bordeaux et alentours.</p>
+  <a class="btn" href="#reservation">Réserver un créneau</a>
+</div>
+
+<section id="prestations">
+<h2>Nos prestations</h2>
+<div class="cards">
+  <div class="card"><h3>Nettoyage intérieur</h3><div class="price">70 €</div><p>Aspirateur, plastiques, tapis, sièges et nettoyage complet de l'intérieur.</p></div>
+  <div class="card"><h3>Option sièges cuir</h3><div class="price">+15 €</div><p>Nettoyage et soin adapté aux surfaces en cuir.</p></div>
+  <div class="card"><h3>Véhicule très sale / SUV</h3><div class="price">90 €</div><p>Tarif adapté aux véhicules plus grands ou nécessitant davantage de travail.</p></div>
+  <div class="card"><h3>Nettoyage des phares</h3><div class="price">+10 €</div><p>Option de nettoyage des optiques.</p></div>
+</div>
+</section>
+
+<section>
+<h2>Zone d'intervention</h2>
+<div class="card" style="text-align:center">
+<p style="font-size:20px;color:#fff;margin:0">Bordeaux et alentours</p>
+<p>Service à domicile selon disponibilité et distance.</p>
+</div>
+</section>
+
+<section id="reservation">
+<h2>Réserver</h2>
+<form class="form" onsubmit="sendReservation(event)">
+<label>Nom</label><input id="name" required>
+<label>Téléphone</label><input id="phone" type="tel" required>
+<label>Véhicule</label><input id="car" placeholder="Ex. Peugeot 208" required>
+<label>Prestation</label>
+<select id="service" required>
+<option value="">Choisir une prestation</option>
+<option>Nettoyage intérieur — 70 €</option>
+<option>Nettoyage intérieur + sièges cuir — 85 €</option>
+<option>Véhicule très sale / SUV — 90 €</option>
+<option>Nettoyage des phares — +10 €</option>
+</select>
+<label>Date souhaitée</label><input id="date" type="date" required>
+<label>Heure souhaitée</label><input id="time" type="time" required>
+<label>Message (facultatif)</label><textarea id="message" placeholder="Précisions sur le véhicule ou la demande..."></textarea>
+<button class="btn" style="margin-top:20px;width:100%">Envoyer ma demande</button>
+<p class="notice">La réservation est une demande de créneau. Le rendez-vous est confirmé après validation.</p>
+</form>
+</section>
+
+<footer>Zafiro Clean — Nettoyage automobile à domicile · Bordeaux et alentours</footer>
+
+<script>
+function sendReservation(e){
+ e.preventDefault();
+ const n=document.getElementById('name').value, p=document.getElementById('phone').value;
+ const c=document.getElementById('car').value, s=document.getElementById('service').value;
+ const d=document.getElementById('date').value, t=document.getElementById('time').value;
+ const m=document.getElementById('message').value;
+ const body=`Bonjour, je souhaite réserver chez Zafiro Clean.%0A%0ANom : ${encodeURIComponent(n)}%0ATéléphone : ${encodeURIComponent(p)}%0AVéhicule : ${encodeURIComponent(c)}%0APrestation : ${encodeURIComponent(s)}%0ADate : ${encodeURIComponent(d)}%0AHeure : ${encodeURIComponent(t)}%0AMessage : ${encodeURIComponent(m)}`;
+ window.location.href='mailto:?subject=Demande de réservation Zafiro Clean&body='+body;
+}
+</script>
+</body>
+</html>
